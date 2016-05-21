@@ -1,0 +1,70 @@
+function +vi-git_status {
+  # Check for untracked files or updated submodules since vcs_info does not.
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    hook_com[unstaged]='%F{red}!%f'
+  fi
+}
+
+function prompt_ivierlin_precmd {
+  vcs_info
+
+  pwd="${PWD#$HOME}"
+  local pwd_length=$#pwd
+  local max_length=10
+  local cut_length=$((pwd_length - max_length))
+  if (( cut_length == 0 )); then
+	local cutpwd="%-1~/"
+  fi
+  if (( cut_length > 0 )); then
+	pwd=${${pwd:h}:${cut_length}}
+	local cutpwd="%-1~/%F{yellow}…$pwd/%f"
+  fi
+
+  pwd="$cutpwd%1~"
+  local newlen=$#pwd
+  if (( newlen > pwd_length )); then
+	pwd="%~"
+  fi
+  local cutpwd=
+}
+
+function prompt_ivierlin_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  # Add a hook for calling info functions before each command.
+  add-zsh-hook precmd prompt_ivierlin_precmd
+
+  # Set git-info parameters.
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:*' check-for-changes true
+  zstyle ':vcs_info:*' stagedstr '%F{green}‣%f'
+  zstyle ':vcs_info:*' unstagedstr '*'
+  zstyle ':vcs_info:*' formats ' %F{8}branch:%F{yellow}%b%f%c%u'
+  zstyle ':vcs_info:*' actionformats " %b%c%u|%F{cyan}%a%f"
+  zstyle ':vcs_info:*' branchformat '%b|%F{cyan}%r%f'
+  zstyle ':vcs_info:git*+set-message:*' hooks git_status
+
+  # Define prompts.
+    
+  PROMPT='${SSH_TTY:+"%(!.%F{red})%n%f@%F{yellow}%m%(?.%F{green}.%F{red})❱%f "}%B${pwd}%(?.%F{green}.%F{red})%(!.#.❱)%b%f '
+  RPROMPT='${vcs_info_msg_0_}'
+
+}
+
+function prompt_ivierlin_help {
+  cat <<EOH
+This prompt's last command exit status symbol is customizable:
+
+  prompt ivierlin [<symbol>]
+
+If this option is not provided, the symbol defaults to ☻.
+EOH
+}
+
+prompt_ivierlin_setup "$@"

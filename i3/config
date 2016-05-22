@@ -23,16 +23,16 @@ set $darkwhite   #a89984
 # set $background  #000000
 set $transparent #1d202100
 
-set $ws1  "1:  "
-set $ws2  "2:  "
-set $ws3  "3:  "
-set $ws4  "4:  "
-set $ws5  "5:  "
-set $ws6  "6:  "
-set $ws7  "7:  "
-set $ws8  "8:  "
-set $ws9  "9: ? "
-set $ws10 "10:  "
+set $ws1  "1:   <small>Browser</small> "
+set $ws2  "2:   <small>Terminal</small> "
+set $ws3  "3:   <small>Code</small> "
+set $ws4  "4:   <small>Git</small> "
+set $ws5  "5:   <small>IRC</small> "
+set $ws6  "6: ➏  <small></small> "
+set $ws7  "7: ➐  <small></small> "
+set $ws8  "8: ➑  <small></small> "
+set $ws9  "9:   <small>Music</small> "
+set $ws10  "10:   <small>Steam</small> "
 
 set $default_gaps_inner 10
 set $default_gaps_outer 0
@@ -41,6 +41,11 @@ gaps outer $default_gaps_outer
 
 workspace $ws1 output DFP5
 workspace $ws2 output DFP10
+workspace $ws3 output DFP5
+workspace $ws4 output DFP10
+workspace $ws5 output DFP10
+workspace $ws10 output DFP5
+
 
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 0 ms
@@ -258,8 +263,8 @@ for_window [class="(?i)blueman"] floating enable
 
 assign [class="(?i)firefox"]                      $ws1
 assign [class="(?i)chromium"]                      $ws1
-#assign [class="(?i)eclipse" window_type="splash"] $ws3
-#assign [class="(?i)eclipse" window_type="normal"] $ws3
+assign [class="(?i)eclipse" window_type="splash"] $ws3
+assign [class="(?i)eclipse" window_type="normal"] $ws3
 #assign [class="(?i)thunderbird"]                  $ws9
 
 bar {
@@ -269,8 +274,8 @@ bar {
     position bottom
     font pango:Hack, FontAwesome 11
     strip_workspace_numbers yes
-#	➜❰❱❮❯
-    separator_symbol "❰"
+#	➜❰❱❮❯◆•·
+    separator_symbol " "
     bindsym button4 nop
     bindsym button5 nop
     output DFP5
@@ -295,7 +300,7 @@ bar {
     position bottom
     font pango:Hack, FontAwesome 11
     strip_workspace_numbers yes
-    separator_symbol "❰"
+    separator_symbol " "
     bindsym button4 nop
     bindsym button5 nop
     output DFP10

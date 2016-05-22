@@ -7,6 +7,8 @@ function +vi-git_status {
 
 function prompt_ivierlin_precmd {
   vcs_info
+  showhost=${SSH_TTY:+":%F{yellow}%m%f"}
+
 
   pwd="${PWD#$HOME}"
   local pwd_length=$#pwd
@@ -52,7 +54,7 @@ function prompt_ivierlin_setup {
 
   # Define prompts.
     
-  PROMPT='${SSH_TTY:+"%(!.%F{red})%n%f@%F{yellow}%m%(?.%F{green}.%F{red})❱%f "}%B${pwd}%(?.%F{green}.%F{red})%(!.#.❱)%b%f '
+  PROMPT='%(!.%F{red}%n%f${showhost:- }.${SSH_TTY:+%n}${showhost})%B${pwd}%(?.%F{green}.%F{red})❱%f%b '
   RPROMPT='${vcs_info_msg_0_}'
 
 }

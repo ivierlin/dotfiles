@@ -33,7 +33,4 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 xrandr --output DFP5 --primary --auto --output DFP10 --auto --left-of DFP5 --rotate left &
-#compton -cCGbfF -i .88 -I 1 -D50 --backend glx &
-#--unredir-if-possible --glx-no-stencil --paint-on-overlay --vsync opengl-mswc --glx-swap-method exchange &
-
 exec i3

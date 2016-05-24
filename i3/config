@@ -4,23 +4,24 @@ set $mod Mod1
 
 # fake-outputs 1280x1440+0+0,1280x1440+1280+0
 
-set $black       #212121
-set $darkblack   #000000
-set $red         #fb4934
-set $darkred     #cc241d
-set $green       #b8bb26
-set $darkgreen   #98971a
-set $yellow      #fabd2f
-set $darkyellow  #d79921
-set $blue        #3465a4
-set $darkblue    #204a87
-set $magenta     #d3869b
-set $darkmagenta #b16286
-set $cyan        #8ec07c
-set $darkcyan    #689d6a
-set $white       #ebdbb2
-set $darkwhite   #a89984
-# set $background  #000000
+set $black       #45505c
+set $darkblack   #0f1112
+set $red         #ee5444
+set $darkred     #c33027
+set $green       #32e07b
+set $darkgreen   #18a64e
+set $yellow      #fbd231
+set $darkyellow  #f39c20
+set $blue        #3e9cec
+set $darkblue    #0f68b8
+set $magenta     #cd51e4
+set $darkmagenta #8843d1
+set $cyan        #40c1d1
+set $darkcyan    #0f8a7d
+set $white       #fcfeff
+set $darkwhite   #adb2b8
+set $foreground  #d1d8de
+set $background  #272d2f
 set $transparent #1d202100
 
 set $ws1  "1:   <small>Browser</small> "
@@ -57,12 +58,12 @@ floating_maximum_size -1 x -1
 
 font pango:Hack, FontAwesome 11
 
-#                       BORDER      BACKGROUND  TEXT   INDICATOR   CHILD_BORDER
-client.focused          $yellow     $yellow     $black $yellow     $yellow
-client.unfocused        $black      $black      $white $black      $black
-client.focused_inactive $black      $black      $white $black      $black
-client.urgent           $darkred    $darkred    $black $darkred    $darkred
-client.background       $black
+#                       BORDER		BACKGROUND	TEXT		INDICATOR	CHILD_BORDER
+client.focused          $darkyellow	$darkyellow	$black		$darkyellow	$darkyellow
+client.unfocused        $black		$background	$foreground	$black		$black
+client.focused_inactive $black		$background	$foreground	$black		$black
+client.urgent           $red		$darkred	$black		$red		$darkred
+client.background       $background
 
 set $up l
 set $down k
@@ -75,7 +76,7 @@ bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 bindsym $mod+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id "rofi -show drun"
 
 bindsym $mod+$left focus left
 bindsym $mod+$right focus right
@@ -124,8 +125,8 @@ bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 bindsym $mod+Tab workspace back_and_forth
 
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+Shift+plus scratchpad show
+#bindsym $mod+Shift+minus move scratchpad
+#bindsym $mod+Shift+plus scratchpad show
 
 bindsym $mod+Shift+s sticky toggle
 # put YouTube into fullscreen and execute this for media mode
@@ -142,18 +143,8 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-#bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/scripts/volume_control.py down 5
-#bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/scripts/volume_control.py up 5
-#bindsym XF86AudioMute exec --no-startup-id $HOME/scripts/volume_control.py toggle
-#bindsym $mod+Shift+v exec --no-startup-id "killall pavucontrol; $HOME/scripts/fullscreen_wrap.sh pavucontrol -t 3"
-
-#bindsym XF86MonBrightnessDown exec --no-startup-id ${HOME}/scripts/backlight.sh -dec 10
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-
-# screenshot
-#bindsym --release Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
-#bindsym --release Shift+Print exec --no-startup-id "maim -s -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
 
 set $mode_resize <span>        </span><span background='#fabd2f' foreground='#000000'> resize </span> <span foreground='#ebdbb2'>l</span>eft <span foreground='#ebdbb2'>r</span>ight <span foreground='#ebdbb2'>u</span>p <span foreground='#ebdbb2'>d</span>own
 bindsym $mod+r mode "$mode_resize"
@@ -180,12 +171,12 @@ mode --pango_markup "$mode_resize" {
 
 set $mode_power <span>        </span><span background='#fabd2f' foreground='#000000'> power </span> <span foreground='#ebdbb2'>l</span>ock <span foreground='#ebdbb2'>e</span>xit <span foreground='#ebdbb2'>s</span>uspend <span foreground='#ebdbb2'>r</span>eboot <span foreground='#ebdbb2'>p</span>oweroff
 mode --pango_markup "$mode_power" {
-    bindsym l mode "default", exec --no-startup-id $HOME/.config/i3/i3exit lock
-    bindsym e mode "default", exec --no-startup-id $HOME/.config/i3/i3exit logout
-    bindsym s mode "default", exec --no-startup-id $HOME/.config/i3/i3exit suspend
-    bindsym h mode "default", exec --no-startup-id $HOME/.config/i3/i3exit hibernate
-    bindsym r mode "default", exec --no-startup-id $HOME/.config/i3/i3exit reboot
-    bindsym p mode "default", exec --no-startup-id $HOME/.config/i3/i3exit shutdown
+    bindsym l mode "default", exec --no-startup-id $HOME/.config/bin/i3exit lock
+    bindsym e mode "default", exec --no-startup-id $HOME/.config/bin/i3exit logout
+    bindsym s mode "default", exec --no-startup-id $HOME/.config/bin/i3exit suspend
+    bindsym h mode "default", exec --no-startup-id $HOME/.config/bin/i3exit hibernate
+    bindsym r mode "default", exec --no-startup-id $HOME/.config/bin/i3exit reboot
+    bindsym p mode "default", exec --no-startup-id $HOME/.config/bin/i3exit shutdown
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -249,23 +240,12 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-for_window [class="(?i)gsimplecal"] floating enable, move position mouse
-for_window [class="(?i)qemu-system"] floating enable
 for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
-for_window [class="(?i)blueman"] floating enable
 
-#for_window [instance="sun-awt-X11-XFramePeer"] floating enable
-#for_window [instance="__scratchpad"] floating enable
-#for_window [instance="__nmtui"] floating enable
-
-#for_window [class="(?i)pavucontrol"] floating enable, border normal, move position mouse
-#for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down 34px
-
-assign [class="(?i)firefox"]                      $ws1
-assign [class="(?i)chromium"]                      $ws1
-assign [class="(?i)eclipse" window_type="splash"] $ws3
-assign [class="(?i)eclipse" window_type="normal"] $ws3
-#assign [class="(?i)thunderbird"]                  $ws9
+assign [class="(?i)firefox"]				$ws1
+assign [class="(?i)chromium"]				$ws1
+assign [class="(?i)eclipse" window_type="splash"]	$ws3
+assign [class="(?i)eclipse" window_type="normal"]	$ws3
 
 bar {
 #    verbose yes
@@ -275,22 +255,22 @@ bar {
     font pango:Hack, FontAwesome 11
     strip_workspace_numbers yes
 #	➜❰❱❮❯◆•·
-    separator_symbol " "
+    separator_symbol "◆"
     bindsym button4 nop
     bindsym button5 nop
     output DFP5
     height 34
     colors {
-        statusline         $white
+        statusline         $foreground
         background         $transparent
-        separator          $white
+        separator          $blue
 
-#                          BORDER       BACKGROUND   TEXT
-        focused_workspace  $transparent $transparent $yellow
-        inactive_workspace $transparent $transparent $white
-        active_workspace   $transparent $transparent $white
-        urgent_workspace   $darkred     $darkred     $black
-        binding_mode       $transparent $transparent $yellow
+#				BORDER		BACKGROUND		TEXT
+        focused_workspace	$transparent	$transparent		$darkyellow
+        inactive_workspace	$transparent	$transparent		$foreground
+        active_workspace	$transparent	$transparent		$foreground
+        urgent_workspace	$red		$darkred		$black
+        binding_mode		$darkyellow	$transparent		$darkyellow
     }
 }
 bar {
@@ -300,7 +280,7 @@ bar {
     position bottom
     font pango:Hack, FontAwesome 11
     strip_workspace_numbers yes
-    separator_symbol " "
+    separator_symbol "◆"
     bindsym button4 nop
     bindsym button5 nop
     output DFP10
@@ -308,16 +288,16 @@ bar {
     tray_padding 5
     height 34
     colors {
-        statusline         $white
+        statusline         $foreground
         background         $transparent
-        separator          $white
+        separator          $blue
 
-#                          BORDER       BACKGROUND   TEXT
-        focused_workspace  $transparent $transparent $yellow
-        inactive_workspace $transparent $transparent $white
-        active_workspace   $transparent $transparent $white
-        urgent_workspace   $darkred     $darkred     $black
-        binding_mode       $transparent $transparent $yellow
+#				BORDER		BACKGROUND		TEXT
+        focused_workspace	$transparent	$transparent		$darkyellow
+        inactive_workspace	$transparent	$transparent		$foreground
+        active_workspace	$transparent	$transparent		$foreground
+        urgent_workspace	$red		$darkred		$black
+        binding_mode		$darkyellow	$transparent		$darkyellow
     }
 }
 

@@ -1,7 +1,7 @@
 ! special
 *.foreground:   #d1d8de
 *.background:   #272d2f
-*.cursorColor:  #d1d8de
+*.cursorColor:  #fcfeff
 
 ! black
 *.color0:       #0f1112
@@ -45,7 +45,7 @@ Xft.antialias: 1
 Xft.rgba: rgb
 
 URxvt.depth: 32
-URxvt.background: [88]#272d2f
+URxvt.background: [95]#272d2f
 URxvt.font: xft:Hack, FontAwesome:size=11
 URxvt.perl-ext:
 URxvt.perl-ext-common:
@@ -68,13 +68,13 @@ rofi.font:                           Hack 14
 ! User: ivierlin
 ! ------------------------------------------------------------------------------
 ! Color scheme for normal row
-rofi.color-normal:                   #fafafa,#99000000,#cccccc,#f39c20,#99000000
+rofi.color-normal:                   #00000000,#fcfeff,#00000000,#fbd231,#272d2f
 ! Color scheme for urgent row
 rofi.color-urgent:                   #ffffff,#99000000,#cccccc,#ee5444,#99ffffff
 ! Color scheme for active row
 rofi.color-active:                   #ffffff,#993465a4,#cccccc,#f39c20,#993465a4
 ! Color scheme window
-rofi.color-window:                   #66000000,#f39c20
+rofi.color-window:                   #99000000,#f39c20
 ! Separator style (none, dash, solid)
 rofi.separator-style:                solid
 ! Border width
@@ -110,7 +110,7 @@ rofi.case-sensitive:                 false
 ! Enable sidebar-mode
 rofi.sidebar-mode:                   false
 ! Row height (in chars)
-rofi.eh:                             2
+rofi.eh:                             1
 ! Enable auto select mode
 rofi.auto-select:                    false
 ! Parse hosts file for ssh mode
@@ -130,7 +130,7 @@ rofi.tokenize:                       true
 ! Monitor id to show on
 rofi.m:                              -1
 ! Margin between rows
-rofi.line-margin:                    10
+rofi.line-margin:                    22
 ! Pre-set filter
 rofi.filter:                         
 ! Hide scroll-bar

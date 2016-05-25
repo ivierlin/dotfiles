@@ -1,8 +1,8 @@
 # vim:filetype=i3
 # i3 config file (v4)
 set $mod Mod1
-
-# fake-outputs 1280x1440+0+0,1280x1440+1280+0
+set $fonts "pango:Hack, FontAwesome 11"
+font $fonts
 
 set $black       #45505c
 set $darkblack   #0f1112
@@ -24,11 +24,11 @@ set $foreground  #d1d8de
 set $background  #272d2f
 set $transparent #1d202100
 
-set $ws1  "1:   <small>Browser</small> "
-set $ws2  "2:   <small>Terminal</small> "
+set $ws1  "1:   <small>Terminal</small> "
+set $ws2  "2:   <small>Browser</small> "
 set $ws3  "3:   <small>Code</small> "
-set $ws4  "4:   <small>Git</small> "
-set $ws5  "5:   <small>IRC</small> "
+set $ws4  "4:   <small>IRC</small> "
+set $ws5  "5:   <small>Git</small> "
 set $ws6  "6: ➏  <small></small> "
 set $ws7  "7: ➐  <small></small> "
 set $ws8  "8: ➑  <small></small> "
@@ -40,13 +40,12 @@ set $default_gaps_outer 0
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 
-workspace $ws1 output DFP5
-workspace $ws2 output DFP10
+workspace $ws1 output DFP10
+workspace $ws2 output DFP5
 workspace $ws3 output DFP5
 workspace $ws4 output DFP10
 workspace $ws5 output DFP10
 workspace $ws10 output DFP5
-
 
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 0 ms
@@ -55,8 +54,6 @@ smart_borders no_gaps
 
 floating_minimum_size -1 x -1
 floating_maximum_size -1 x -1
-
-font pango:Hack, FontAwesome 11
 
 #                       BORDER		BACKGROUND	TEXT		INDICATOR	CHILD_BORDER
 client.focused          $darkyellow	$darkyellow	$black		$darkyellow	$darkyellow
@@ -236,23 +233,22 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
-
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
 for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
 
-assign [class="(?i)firefox"]				$ws1
-assign [class="(?i)chromium"]				$ws1
+assign [class="(?i)firefox"]				$ws2
+assign [class="(?i)chromium"]				$ws2
 assign [class="(?i)eclipse" window_type="splash"]	$ws3
 assign [class="(?i)eclipse" window_type="normal"]	$ws3
 
 bar {
 #    verbose yes
     status_command i3blocks -c ~/.config/i3blocks/primary.conf
-    i3bar_command i3bar -t
+    i3bar_command i3bar -t 
     position bottom
-    font pango:Hack, FontAwesome 11
+    font $fonts
     strip_workspace_numbers yes
 #	➜❰❱❮❯◆•·
     separator_symbol "◆"
@@ -263,13 +259,13 @@ bar {
     colors {
         statusline         $foreground
         background         $transparent
-        separator          $blue
+        separator          $transparent
 
 #				BORDER		BACKGROUND		TEXT
-        focused_workspace	$transparent	$transparent		$darkyellow
+        focused_workspace	$transparent	$transparent		$yellow
         inactive_workspace	$transparent	$transparent		$foreground
         active_workspace	$transparent	$transparent		$foreground
-        urgent_workspace	$red		$darkred		$black
+        urgent_workspace	$transparent	$red			$white
         binding_mode		$darkyellow	$transparent		$darkyellow
     }
 }
@@ -278,7 +274,7 @@ bar {
     status_command i3blocks -c ~/.config/i3blocks/secondary.conf
     i3bar_command i3bar -t
     position bottom
-    font pango:Hack, FontAwesome 11
+    font $fonts
     strip_workspace_numbers yes
     separator_symbol "◆"
     bindsym button4 nop
@@ -290,10 +286,10 @@ bar {
     colors {
         statusline         $foreground
         background         $transparent
-        separator          $blue
+        separator          $transparent
 
 #				BORDER		BACKGROUND		TEXT
-        focused_workspace	$transparent	$transparent		$darkyellow
+        focused_workspace	$transparent	$transparent		$yellow
         inactive_workspace	$transparent	$transparent		$foreground
         active_workspace	$transparent	$transparent		$foreground
         urgent_workspace	$red		$darkred		$black
@@ -302,6 +298,6 @@ bar {
 }
 
 # AUTOSTART
-exec hsetroot -fill ~/.config/cookie_wallpaper.jpg
-exec redshift -l 49:8 -t 6500:4600
-exec compton --config ~/.config/compton/compton.conf
+exec --no-startup-id hsetroot -fill ~/.config/wallpaper
+exec --no-startup-id redshift -l 49:8 -t 6500:4600
+exec --no-startup-id compton --config ~/.config/compton/compton.conf

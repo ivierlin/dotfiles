@@ -1,0 +1,6 @@
+config/**/
+
+!config/bspwm/bspwmrc
+!config/compton
+!config/nvim
+!config/sxhkd

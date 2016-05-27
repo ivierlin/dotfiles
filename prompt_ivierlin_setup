@@ -7,27 +7,23 @@ function +vi-git_status {
 
 function prompt_ivierlin_precmd {
   vcs_info
-  showhost=${SSH_TTY:+":%F{yellow}%m%f"}
+  symbol="%B%(?.%F{green}.%F{red})❱%f%b"
+  histnum="%(?.%F{8}.%F{red})#%h%f"
+  local showhost=${SSH_TTY:+":%F{yellow}%m%f "}
+  login="!.%F{red}%n%f${showhost:- }.${SSH_TTY:+%n}"
 
 
-  pwd="${PWD#$HOME}"
-  local pwd_length=$#pwd
-  local max_length=10
-  local cut_length=$((pwd_length - max_length))
-  if (( cut_length == 0 )); then
-	local cutpwd="%-1~/"
+  pwd="${PWD/#$HOME/~}"
+  local base="${pwd:0:1}${${pwd:1}%%/*}"
+  local pat="/~"
+  local dir="/$pwd:t"
+  dir="${dir/#$pat/~}"
+  if [[ $dir == $base ]]; then
+	base=
   fi
-  if (( cut_length > 0 )); then
-	pwd=${${pwd:h}:${cut_length}}
-	local cutpwd="%-1~/%F{yellow}…$pwd/%f"
-  fi
+  local mid="${${pwd#$base}%$dir}"
 
-  pwd="$cutpwd%1~"
-  local newlen=$#pwd
-  if (( newlen > pwd_length )); then
-	pwd="%~"
-  fi
-  local cutpwd=
+  pwd="$base%F{blue}%B%12</…<%b%f$mid%<<%B$dir%b"
 }
 
 function prompt_ivierlin_setup {
@@ -54,8 +50,8 @@ function prompt_ivierlin_setup {
 
   # Define prompts.
     
-  PROMPT='%(!.%F{red}%n%f${showhost:- }.${SSH_TTY:+%n}${showhost})%B${pwd}%(?.%F{green}.%F{red})❱%f%b '
-  RPROMPT='${vcs_info_msg_0_}'
+  PROMPT='%(${login}${showhost})${pwd}${symbol} '
+  RPROMPT='${vcs_info_msg_0_} ${histnum}'
 
 }
 

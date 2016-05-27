@@ -1,0 +1,9 @@
+#!/bin/bash
+IMAGE="/tmp/lockscreen.png"
+TEXT="/tmp/locktext.png"
+
+scrot $IMAGE
+convert $IMAGE -scale 10% -scale 1000% -fill black -colorize 25% $IMAGE
+[[ -f $1 ]] && convert $IMAGE $1 -gravity center -composite -matte $IMAGE
+
+i3lock -u -i $IMAGE

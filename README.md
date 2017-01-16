@@ -1,7 +1,8 @@
 # dotfiles
 
-- i3-gaps & i3blocks-gaps
-- compton
-- rxvt-unicode
+- bspwm & sxhkd
 - zsh & prezto
-- Hack & FontAwesome
+
+- compton, hsetroot, redshift, xbanish, rofi, rxvt-unicode, xrandr, neovim, dein, base16-shell
+
+- Hack & Font Awesome

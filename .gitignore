@@ -1,6 +1,9 @@
-config/**/
+config/*
 
 !config/bspwm/bspwmrc
 !config/compton
-!config/nvim
+!config/nvim/init.vim
 !config/sxhkd
+!config/redshift.conf
+!config/xinitrc
+!config/Xresources

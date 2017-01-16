@@ -7,3 +7,4 @@ config/*
 !config/redshift.conf
 !config/xinitrc
 !config/Xresources
+!config/wallpaper

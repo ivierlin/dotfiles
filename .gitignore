@@ -1,7 +1,11 @@
 config/*
 
+!config/bspwm
+config/bspwm/*
 !config/bspwm/bspwmrc
 !config/compton
+!config/nvim/
+config/nvim/*
 !config/nvim/init.vim
 !config/sxhkd
 !config/redshift.conf
